@@ -1,16 +1,20 @@
 <?php
 defined('_VALID') or die('not allowed');
+
 function init_login() {
 // Simulasi data account nama dan password
 $nama = 'admin';
 $pass = 'admin';
+
 if (isset($_POST['nama']) && isset($_POST['pass'])) {
 $n = trim($_POST['nama']);
 $p = trim($_POST['pass']);
+
 if ( ($n === $nama) && ($p === $pass) ) {
 // Jika sama, set cookie
 setcookie('nlogin', $n);
 setcookie('time', time());
+
 // redireksi
 ?>
 <script type="text/javascript">
@@ -18,11 +22,13 @@ document.location.href="./";
 </script>
 <?php
 } else {
-echo 'Nama/Password Tidak Sesuai';
+echo 'Maaf Nama/Password Tidak Sesuai';
 return false;
 }
 }
 }
+
+
 function validate() {
 if (!isset($_COOKIE['nlogin']) || !isset($_COOKIE['time']) ) { ?>
 <div class="inner">
@@ -46,6 +52,7 @@ if (!isset($_COOKIE['nlogin']) || !isset($_COOKIE['time']) ) { ?>
 <?php
 exit;
 }
+
 if (isset($_GET['m']) && $_GET['m'] == 'logout') {
 // Hapus cookie
 if (isset($_COOKIE['nlogin'])) {
@@ -61,5 +68,7 @@ document.location.href="./";
 </script>
 <?php
 }
+
 }
+
 ?>
